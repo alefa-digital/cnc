@@ -1,0 +1,160 @@
+extends layout
+
+block content
+	#myModal.modal.fade(role='dialog')
+		.modal-dialog.modal-lg
+			.modal-content
+				.modal-header.inline
+					button.close(type='button', data-dismiss='modal') ×
+					h4.modal-title Liste des adhérents
+				.modal-body
+					table#example.display.compact.dataTable(width='100%', cellspacing='0')
+						thead
+							tr
+								th Identifiant
+								th Nom
+								th Departement
+								th Region
+								th Correspondant
+								th Téléphone
+								th Email
+								th SIRET
+								th Actions
+						tfoot
+							tr
+								th Identifiant
+								th Nom
+								th Departement
+								th Region
+								th Correspondant
+								th Téléphone
+								th Email
+								th SIRET
+								th Actions
+				.modal-footer
+					a(href="/exportXLS")
+						img(src="images/xls.png", alt="Export XLS")
+					a(href="/exportPDF")
+						img(src="images/pdf.png", alt="Export PDF")
+					button.btn.btn-default(type='button', data-dismiss='modal') Fermer
+	.container-fluid
+		.row
+			.main.col-sm-9.offset-sm-0.col-md-12.pt-3
+				form(id="formAdherent", onsubmit="valideForm(); return true;")
+					.row
+						.col-8
+							h1 Gestion de l'adhérent
+						.col-2.text-right
+							button.btn.btn-success(type='submit', id="submit") Valider
+						.col-2
+							button.btn.btn-warning(type='reset') Annuler
+					.row
+						.col-4
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') N°Adhérent
+								.col-9
+									input#example-text-input.form-control(type='text', value='', name='numAdherent', required)
+						.col-4
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') SIRET
+								.col-9
+									input#siret-text-input.form-control(type='text', value='', name='siret', required)
+						.col-4
+							.input-group
+								label.input-group-addon(for='sel1') Industrie
+								select#sel1.form-control(name='industrie')
+									option(selected='selected', value="0", required) -- Sélectionner --
+									option(value=Maroquinerie) Maroquinerie
+									option(value=Chaussure) Chaussure
+									option(value=Ganterie) Ganterie
+									option(value=Ensemble) Ensemble
+					.row
+						.col-8
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') Nom
+								.col-9
+									input#example-text-input.form-control(type='text', value='', name='nom', required)
+						.col-4
+							.input-group
+								label.input-group-addon(for='sel1') Panel
+								select#sel1.form-control(name='panel', required)
+									option(selected='selected', value="0") -- Sélectionner --
+									option(value=Annuel) Annuel
+									option(value=Mensuel) Mensuel
+					.row
+						.col-8
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') Adresse
+								.col-9
+									input#example-text-input.form-control(type='text', value='', name='adresse')
+					.row
+						.col-8
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') CP
+								.col-9
+									input#example-text-input.form-control(type='text', value='', name='cp', pattern="[0-9]{5}", required )
+						.col-4.text-center
+							span.badge.badge-default Supprimé le 29/11/2017
+					.row
+						.col-8
+							.form-group.row
+								label.col-3.col-form-label(for='example-text-input') Ville
+								.col-9
+									input#siret-text-input.form-control(type='text', value='', name='ville', required)
+						.col-2.text-right
+							a.btn.btn-success(type='button') Réactiver
+						.col-2
+							a.btn.btn-warning.disabled(type='button') Supprimer
+					.row
+						.col-8
+							.row
+								.col-12
+									.form-group.row
+										label.col-3.col-form-label(for='example-text-input') Téléphone
+										.col-9
+											input#example-text-input.form-control(type='tel', value='', name='telephone')
+							.row
+								.col-12
+									.form-group.row
+										label.col-3.col-form-label(for='example-text-input') Site web
+										.col-9
+											input#siret-text-input.form-control(type='text', value='', name='site')
+							.row
+								.col-12
+									.form-group.row
+										label.col-3.col-form-label(for='example-text-input') Fax
+										.col-9
+											input#siret-text-input.form-control(type='text', value='', name='fax')
+							.row
+								.col-12
+									.form-group.row
+										label.col-3.col-form-label(for='example-text-input') E-Mail
+										.col-9
+											input#example-text-input.form-control(type='email', value='', name='email', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+							.row
+								.col-12
+									.form-group.row
+										label.col-3.col-form-label(for='example-text-input') Correspondant
+										.col-9
+											input#example-text-input.form-control(type='text', value='', name='correspondant')
+						.col-4.pt-2
+							.form-group
+								label.control-label(for='message') Message
+								textarea#message.form-control(cols='40', name='message', rows='8')
+					//-nav.col-sm-3.col-md-2.offset-md-10.hidden-xs-down.bg-faded.sidebar
+						ul.nav.nav-pills.flex-column
+							li.nav-item
+								a.nav-link.active(href='#')
+									| Overview 
+									span.sr-only (current)
+							li.nav-item
+								a.nav-link(href='#') Reports
+							li.nav-item
+								a.nav-link(href='#') Analytics
+							li.nav-item
+								a.nav-link(href='#') Export
+						.container
+							table#table.table-striped(data-height='460')
+								thead
+									tr
+										th(data-field='name')

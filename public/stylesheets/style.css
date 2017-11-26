@@ -1,0 +1,75 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+  background-color: aliceblue;
+}
+
+/* Sidebar navigation */
+.sidebar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+  margin-right: 0;
+}
+
+.sidebar .nav-link {
+  border-radius: 0;
+}
+
+/**
+*	Modal
+*/
+.modal-header{
+	display:block !important;
+}
+.modal-dialog {
+max-width: 90% !important;
+width: 100%;
+height: 80%;
+margin: 5%;
+padding: 0;
+}
+
+.modal-content {
+height: auto;
+min-height: 100%;
+border: 0 none;
+border-radius: 0;
+}
+
+/**
+*	DataTables
+*/
+table.dataTable th { font-size: 12px; }
+table.dataTable td { font-size: 11px; }
