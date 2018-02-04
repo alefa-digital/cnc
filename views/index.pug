@@ -14,7 +14,7 @@ block content
 								th Identifiant
 								th Nom
 								th Departement
-								th Region
+								th Industrie
 								th Correspondant
 								th Téléphone
 								th Email
@@ -25,7 +25,7 @@ block content
 								th Identifiant
 								th Nom
 								th Departement
-								th Region
+								th Industrie
 								th Correspondant
 								th Téléphone
 								th Email
@@ -40,10 +40,10 @@ block content
 	.container-fluid
 		.row
 			.main.col-sm-9.offset-sm-0.col-md-12.pt-3
-				form(id="formAdherent", onsubmit="valideForm(); return true;")
+				form(id="formAdherent", method="POST")
 					.row
 						.col-8
-							h1 Gestion de l'adhérent
+							h1 Ajouter un adhérent
 						.col-2.text-right
 							button.btn.btn-success(type='submit', id="submit") Valider
 						.col-2
@@ -53,46 +53,55 @@ block content
 							.form-group.row
 								label.col-3.col-form-label(for='example-text-input') N°Adhérent
 								.col-9
-									input#example-text-input.form-control(type='text', value='', name='numAdherent', required)
+									input#example-text-input.form-control(type='text', value='', name='numAdherent',  maxlength=6, required, pattern="[0-9]{0,6}", placeholder="Identifiant de l'adhérent sur 6 chiffres maximum")
 						.col-4
 							.form-group.row
 								label.col-3.col-form-label(for='example-text-input') SIRET
 								.col-9
-									input#siret-text-input.form-control(type='text', value='', name='siret', required)
+									input#siret-text-input.form-control(type='text', value='', name='numSiret', maxlength=14, pattern="[0-9]{14}", required,  placeholder="Numéro SIRET sur 14 chiffres")
 						.col-4
 							.input-group
 								label.input-group-addon(for='sel1') Industrie
 								select#sel1.form-control(name='industrie')
-									option(selected='selected', value="0", required) -- Sélectionner --
-									option(value=Maroquinerie) Maroquinerie
-									option(value=Chaussure) Chaussure
-									option(value=Ganterie) Ganterie
-									option(value=Ensemble) Ensemble
+									option(selected='selected', value=1) Tannerie
+									option(value=2) Mégisserie
+									option(value=3) Chaussure
+									option(value=4) Cuirs_et_peaux_bruts
+									option(value=5) Maroquinerie
+									option(value=6) Ganterie
 					.row
 						.col-8
-							.form-group.row
-								label.col-3.col-form-label(for='example-text-input') Nom
+							.form-group.row.align-items-center
+								label.col-3.col-form-label(for='example-text-input') Nom de l'adhérent
 								.col-9
-									input#example-text-input.form-control(type='text', value='', name='nom', required)
+									.row
+										.col-12
+											input#example-text-input.form-control(type='text', value='', name='nom1', required,  placeholder="Nom principal de l'adhérent")
+										.col-12
+											input#example-text-input.form-control(type='text', value='', name='nom2', placeholder="Libellé secondaire")
 						.col-4
 							.input-group
 								label.input-group-addon(for='sel1') Panel
 								select#sel1.form-control(name='panel', required)
-									option(selected='selected', value="0") -- Sélectionner --
-									option(value=Annuel) Annuel
-									option(value=Mensuel) Mensuel
+									option(selected='selected', value=1) Annuel
+									option(value=2) Mensuel
+									option(value=3) Ensemble
 					.row
 						.col-8
-							.form-group.row
+							.form-group.row.align-items-center
 								label.col-3.col-form-label(for='example-text-input') Adresse
 								.col-9
-									input#example-text-input.form-control(type='text', value='', name='adresse')
+									.row
+										.col-12
+											input#example-text-input.form-control(type='text', value='', name='adresse1', required,  placeholder="Adresse de l'adhérent")
+										.col-12
+											input#example-text-input.form-control(type='text', value='', name='adresse2', placeholder="Adresse complémentaire")
 					.row
 						.col-8
 							.form-group.row
 								label.col-3.col-form-label(for='example-text-input') Code postal
 								.col-9
-									input#example-text-input.form-control(type='text', value='', name='cp', pattern="[0-9]{5}", required )
+									input#example-text-input.form-control(type='text', value='', name='codePostal', pattern="[0-9]{5}", maxlength=5, required,  placeholder="Code postal de l'adhérent")
 						.col-4.text-center
 							span.badge.badge-default Supprimé le 29/11/2017
 					.row
@@ -100,7 +109,7 @@ block content
 							.form-group.row
 								label.col-3.col-form-label(for='example-text-input') Ville
 								.col-9
-									input#siret-text-input.form-control(type='text', value='', name='ville', required)
+									input#siret-text-input.form-control(type='text', value='', name='ville', required,  placeholder="Ville de l'adhérent")
 						.col-2.text-right
 							a.btn.btn-success(type='button') Réactiver
 						.col-2
@@ -110,53 +119,70 @@ block content
 							.row
 								.col-12
 									.form-group.row
-										label.col-3.col-form-label(for='example-text-input') Téléphone
-										.col-4
-											input#example-text-input.form-control(type='tel', value='', name='telephone')
-										.col-4
-											input#example-text-input.form-control(type='tel', value='', name='telephone')
-							.row
-								.col-12
-									.form-group.row
 										label.col-3.col-form-label(for='example-text-input') Site web
 										.col-9
-											input#siret-text-input.form-control(type='text', value='', name='site')
+											input#siret-text-input.form-control(type='text', value='', name='site', placeholder="Adresse internet du site de l'adhérent")
 							.row
 								.col-12
 									.form-group.row
 										label.col-3.col-form-label(for='example-text-input') Fax
 										.col-9
-											input#siret-text-input.form-control(type='text', value='', name='fax')
-							.row
-								.col-12
-									.form-group.row
-										label.col-3.col-form-label(for='example-text-input') E-Mail
-										.col-9
-											input#example-text-input.form-control(type='email', value='', name='email', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
-							.row
-								.col-12
-									.form-group.row  
-										label.col-3.col-form-label(for='example-text-input') Correspondant 1
-										.col-3
-											select#sel1.form-control(name='civilite1', required)
-												option(selected='selected', value="MR") Monsieur
-												option(value="MME") Madame
-										.col-6
-											input#example-text-input.form-control(type='text', value='', name='correspondant1')
-							.row
-								.col-12
-									.form-group.row  
-										label.col-3.col-form-label(for='example-text-input') Correspondant 2
-										.col-3
-											select#sel1.form-control(name='civilite2', required)
-												option(selected='selected', value="MR") Monsieur
-												option(value="MME") Madame
-										.col-6
-											input#example-text-input.form-control(type='text', value='', name='correspondant2')
+											input#siret-text-input.form-control(type='text', value='', name='fax',  placeholder="Numéro du fax de l'adhérent")
+							.card
+								h5.card-header.text-center Identité du correspondant principal 
+								.card-block.pt-2
+									.row
+										.col-12
+											.form-group.row  
+												label.col-3.col-form-label(for='example-text-input') Nom du correspondant
+												.col-1
+													select#sel1.form-control(name='civilite1', required)
+														option(selected='selected', value="MR") Mr
+														option(value="MME") Mme
+												.col-8
+													input#example-text-input.form-control(type='text', value='', name='correspondant1', required, placeholder="Prénom et nom du correspondant principal")
+									.row
+										.col-12
+											.form-group.row
+												label.col-3.col-form-label(for='example-text-input') Téléphone
+												.col-9
+													input#example-text-input.form-control(type='tel', value='', name='tel1', pattern="[0-9]{10}", maxlength=10, required, placeholder="Numéro de téléphone du correspondant principal")
+									.row
+										.col-12
+											.form-group.row
+												label.col-3.col-form-label(for='example-text-input') E-Mail
+												.col-9
+													input#example-text-input.form-control(type='email', value='', name='email1', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$", placeholder="Adresse mail du correspondant principal")
+							.card
+								h5.card-header.text-center Identité du 2ème correspondant
+								.card-block.pt-2
+									.row
+										.col-12
+											.form-group.row  
+												label.col-3.col-form-label(for='example-text-input') Nom du 2ème correspondant
+												.col-1
+													select#sel1.form-control(name='civilite2')
+														option(selected='selected', value="0", disabled) --
+														option(value="MR") Mr
+														option(value="MME") Mme
+												.col-8
+													input#example-text-input.form-control(type='text', value='', name='correspondant2', placeholder="Prénom et nom du 2ème correspondant")
+									.row
+										.col-12
+											.form-group.row
+												label.col-3.col-form-label(for='example-text-input') Téléphone
+												.col-9
+													input#example-text-input.form-control(type='tel', value='', name='tel2', pattern="[0-9]{10}", maxlength=10, placeholder="Numéro de téléphone du 2ème correspondant")
+									.row
+										.col-12
+											.form-group.row
+												label.col-3.col-form-label(for='example-text-input') E-Mail
+												.col-9
+													input#example-text-input.form-control(type='email', value='', name='email2', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$", placeholder="Adresse mail du 2ème correspondant")
 						.col-4.pt-2
 							.form-group
 								label.control-label(for='message') Commentaire
-								textarea#message.form-control(cols='40', name='message', rows='8')
+								textarea#message.form-control(cols='40', name='commentaire', rows='21')
 					//-nav.col-sm-3.col-md-2.offset-md-10.hidden-xs-down.bg-faded.sidebar
 						ul.nav.nav-pills.flex-column
 							li.nav-item

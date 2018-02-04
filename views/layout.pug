@@ -11,7 +11,7 @@ html
   body
    block navBar
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-     a.navbar-brand(href="#") Conseil National du Cuir
+     a.navbar-brand(href="/") Conseil National du Cuir
      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
      #navbarsExampleDefault.collapse.navbar-collapse
@@ -40,7 +40,7 @@ html
              a.dropdown-item(href="#") Edition de la liste des adhérents
              a.dropdown-item(href="#") Qui fait quoi ?
         form.form-inline.my-2.my-lg-0
-         button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Rechercher un adhérent
+         button.btn.btn-info.btn-lg(id='Recherche', type='button', data-toggle='modal', data-target='#myModal') Rechercher un adhérent
    block content
    script(src='/lib/jquery/jquery-3.2.1.min.js')
    script(src='/lib/popper/popper.min.js')

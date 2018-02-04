@@ -42,7 +42,7 @@ $(document).ready(function() {
             { "data": "id" },
             { "data": "nom" },
             { "data": "departement" },
-            { "data": "region" },
+            { "data": "industrie" },
             { "data": "correspondant" },
             { "data": "telephone" },
             { "data": "email" },
@@ -57,7 +57,7 @@ $(document).ready(function() {
         ]
     } );
 	
-	// Apply the search
+	// Application de la recherche
     table.columns().every( function () {
         var that = this;
  
@@ -70,20 +70,26 @@ $(document).ready(function() {
         } );
     } );
 	
+	$( "#Recherche" ).click(function() {
+		table.ajax.reload();
+	});
+
 	
+	// Formulaire d'ajout d'un adhérent
+	$('#formAdherent').submit(function(event) {
+		event.preventDefault();
+		$.ajax({
+			 type: 'POST',
+			 url: "/api/v1/adherent",
+			 data: $('#formAdherent').serialize(), 
+			 success: function(reponse) {
+				$('#formAdherent')[0].reset();
+				alert("Ajout de l'adherent " + reponse.data + " réussi"); 
+			 },
+			error: function(err) {
+				alert("Erreur lors de l'ajout de l'adhrent : \n" + err.responseText);
+			}
+		});		
+	});
 
 } );
-
-function valideForm(){
-	$.ajax({
-		 type: 'POST',
-		 url: "/api/v1/adherant",
-		 data: $('#formAdherent').serialize(), 
-		 success: function(response) {
-			alert(JSON.stringify(response)); 
-		 },
-		error: function() {
-			alert("Erreur lors la requête POST");
-		}
-	});
-}
