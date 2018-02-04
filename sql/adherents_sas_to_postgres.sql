@@ -1,26 +1,24 @@
 /*
 	Script d'importation du fichier CSV : ADHERENTS.csv
-    - Création d'una table temporaire (ADHERENTS_TMP) avec les données brutes, tel qu'elles sont
-    	définies dans le fichier source
-    - Création de la table final des adhérents : ADHERENTS à partir de la table TMP :
-    		- Définition des formats des variables
-            - Fusion de variables
+    - Création de la table des adhérents
 */
 DROP TABLE IF EXISTS public.ADHERENTS_TMP ;
 CREATE TABLE  public.ADHERENTS_TMP  (
-  "NUMADHER" character(7) DEFAULT NULL,
+  "NUMADHER" integer NOT NULL PRIMARY KEY,
   "NOM1" text DEFAULT NULL,
   "NOM2" text DEFAULT NULL,
   "ADR1" text DEFAULT NULL,
   "ADR2" text DEFAULT NULL,
   "CP" character(5) DEFAULT NULL,
   "VILLE" text DEFAULT NULL,
-  "DEP" character(2) DEFAULT NULL,
+  "DEP" character(2) DEFAULT NULL ,
   "LIBDEP" text DEFAULT NULL,
   "LIBREG" text DEFAULT NULL,
-  "CODE_INDUSTRIE" character(2) DEFAULT NULL,    
+  "CODE_INDUSTRIE" character(2) DEFAULT NULL REFERENCES CORR_INDUSTRIE(code_industrie) ON DELETE CASCADE,    
   "LIBELLE_INDUSTRIE" text DEFAULT NULL,
   "SIRET" character(14) DEFAULT NULL,
+  "CIVIL1" text DEFAULT NULL,
+  "CIVIL2" text DEFAULT NULL,
   "CORRES1" text DEFAULT NULL,
   "CORRES2" text DEFAULT NULL,
   "TEL1" character(10) DEFAULT NULL,
@@ -36,5 +34,5 @@ CREATE TABLE  public.ADHERENTS_TMP  (
   "DT_REACTIV" text DEFAULT NULL
 ) ;
 
-copy public.ADHERENTS_TMP ("NUMADHER", "NOM1", "NOM2", "ADR1", "ADR2", "CP", "VILLE", "DEP", "LIBDEP", "LIBREG", "CODE_INDUSTRIE", "LIBELLE_INDUSTRIE", "SIRET", "CORRES1", "CORRES2", "TEL1", "TEL2", "PANEL", "EMAIL", "EMAIL2", "FAX", "SITE_WEB", "COMMENTAIRE", "DT_CRE", "DT_SUPPR", "DT_REACTIV") 
+copy public.ADHERENTS_TMP ("NUMADHER", "NOM1", "NOM2", "ADR1", "ADR2", "CP", "VILLE", "DEP", "CODE_INDUSTRIE", "SIRET", "CIVIL1", "CIVIL2", "CORRES1", "CORRES2", "TEL1", "TEL2", "PANEL", "EMAIL", "EMAIL2", "FAX", "SITE_WEB", "COMMENTAIRE", "DT_CRE", "DT_SUPPR", "DT_REACTIV") 
 FROM 'D:/data/nodejs/dev/cnc/ADHERENTS.csv' DELIMITER ';' CSV HEADER ENCODING 'LATIN9' QUOTE '"' ESCAPE '''';

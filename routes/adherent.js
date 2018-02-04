@@ -6,9 +6,9 @@ const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/
 
 // Configuration des accès à la BDD
 const config = {
-    user: 'postgres',
+    user: 'demo',
     database: 'cnc',
-    password: '',
+    password: 'demo',
     port: 5432
 };
 
@@ -16,7 +16,7 @@ const config = {
 const pool = new pg.Pool(config);
 
 /* GET adhérent : Liste des adhérent */
-router.get('/v1/adherant', (req, res, next) => {
+router.get('/v1/adherent', (req, res, next) => {
   const results = [];
   // Connexion à la BDD
    pool.connect( (err, client, done) => {
@@ -39,19 +39,19 @@ router.get('/v1/adherant', (req, res, next) => {
 });
 
 /* POST adhérent : Ajout d'un nouveau adhérent */
-router.post('/v1/adherant', (req, res, next) => {
+router.post('/v1/adherent', (req, res, next) => {
 		// Envoi au navigateur les champs du formulaire
 		res.status(200).send(req.body);
 		// Faire une requete INSERT INTO
 });
 
 /* PUT adhérent : Mise à jour d'un adhérent */
-router.put('/v1/adherant', (req, res, next) => {
+router.put('/v1/adherent', (req, res, next) => {
 		res.status(200).send(true);
 });
 
 /* DELETE adhérent : Suppression d'un adhérent */
-router.delete('/v1/adherant', (req, res, next) => {
+router.delete('/v1/adherent', (req, res, next) => {
 		res.status(200).send(true);
 });
 

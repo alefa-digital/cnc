@@ -33,7 +33,7 @@ $(document).ready(function() {
     };
 	
     var table = $('#example').DataTable( {
-        "ajax": "/api/v1/adherant",
+        "ajax": "/api/v1/adherent",
 		"responsive": true,
 		"language" : language,
 		"lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Tous"]],

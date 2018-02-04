@@ -90,7 +90,7 @@ block content
 					.row
 						.col-8
 							.form-group.row
-								label.col-3.col-form-label(for='example-text-input') CP
+								label.col-3.col-form-label(for='example-text-input') Code postal
 								.col-9
 									input#example-text-input.form-control(type='text', value='', name='cp', pattern="[0-9]{5}", required )
 						.col-4.text-center
@@ -111,7 +111,9 @@ block content
 								.col-12
 									.form-group.row
 										label.col-3.col-form-label(for='example-text-input') Téléphone
-										.col-9
+										.col-4
+											input#example-text-input.form-control(type='tel', value='', name='telephone')
+										.col-4
 											input#example-text-input.form-control(type='tel', value='', name='telephone')
 							.row
 								.col-12
@@ -133,13 +135,27 @@ block content
 											input#example-text-input.form-control(type='email', value='', name='email', pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
 							.row
 								.col-12
-									.form-group.row
-										label.col-3.col-form-label(for='example-text-input') Correspondant
-										.col-9
-											input#example-text-input.form-control(type='text', value='', name='correspondant')
+									.form-group.row  
+										label.col-3.col-form-label(for='example-text-input') Correspondant 1
+										.col-3
+											select#sel1.form-control(name='civilite1', required)
+												option(selected='selected', value="MR") Monsieur
+												option(value="MME") Madame
+										.col-6
+											input#example-text-input.form-control(type='text', value='', name='correspondant1')
+							.row
+								.col-12
+									.form-group.row  
+										label.col-3.col-form-label(for='example-text-input') Correspondant 2
+										.col-3
+											select#sel1.form-control(name='civilite2', required)
+												option(selected='selected', value="MR") Monsieur
+												option(value="MME") Madame
+										.col-6
+											input#example-text-input.form-control(type='text', value='', name='correspondant2')
 						.col-4.pt-2
 							.form-group
-								label.control-label(for='message') Message
+								label.control-label(for='message') Commentaire
 								textarea#message.form-control(cols='40', name='message', rows='8')
 					//-nav.col-sm-3.col-md-2.offset-md-10.hidden-xs-down.bg-faded.sidebar
 						ul.nav.nav-pills.flex-column
